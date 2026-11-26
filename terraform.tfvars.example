@@ -1,0 +1,9 @@
+aws_region   = "us-east-1"
+project_name = "three-tier"
+environment  = "dev"
+vpc_cidr     = "10.0.0.0/16"
+az_count     = 2
+
+# Free-tier friendly defaults. Turn on only for short demos.
+enable_nat_gateway = false
+enable_flow_logs   = false
