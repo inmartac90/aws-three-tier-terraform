@@ -129,10 +129,11 @@ With the defaults, Phase 1 creates only resources that have **no hourly charge**
 
 ## Security scanning
 
-Checkov runs on every pull request. Expected, reviewed findings:
+Checkov runs on every pull request (71 passed, 5 reviewed findings in Phase 1):
 
-- **ALB security group allows 0.0.0.0/0 on 80/443.** Intentional: it is the public entry point. Port 80 only redirects to HTTPS once the listener is added in Phase 2.
-- **Flow logs disabled by default.** Intentional for cost; enable with `enable_flow_logs = true`.
+- **CKV_AWS_260, ALB security group allows 0.0.0.0/0 on port 80.** Intentional: it is the public entry point, and port 80 will only redirect to HTTPS once the listener is added in Phase 2.
+- **CKV2_AWS_5, security groups not attached to a resource.** Expected until Phase 2 attaches them to the ALB, instances and RDS.
+- **CKV_AWS_394, availability zones data source not pinned by zone ID.** Mitigated: the module takes a fixed `slice` of `az_count` zones, so new AZs never change the result.
 
 ## Author
 
